@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buy
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: buy
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: buy
+    spec:
+      containers:
+      - name: buy
+        stdin: true
+        image: ghcr.io/REPO/IMAGENAME:IMAGEVERSION
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 8888
+      imagePullSecrets:
+        - name: ghcr-login-secret
+
